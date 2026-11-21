@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глубина | Моё хобби — морской мир</title>
+    <style>
+        :root {
+            --bg-dark: #031525;
+            --bg-card: #082742;
+            --accent: #00d4ff;
+            --accent-hover: #00a3c4;
+            --text-main: #e6f4f1;
+            --text-muted: #94b8c7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Шапка и навигация */
+        header {
+            background: rgba(3, 21, 37, 0.9);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Главный экран */
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: radial-gradient(circle at center, #0a3b61 0%, var(--bg-dark) 80%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .hero p {
+            max-width: 650px;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: var(--bg-dark);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Секции */
+        section {
+            padding: 4rem 8%;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--accent);
+        }
+
+        /* Сетка карточек */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            padding: 1.8rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.15);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Интерактивный блок глубины */
+        .depth-box {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            border: 1px solid var(--accent);
+        }
+
+        .depth-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .depth-btn {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--accent);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .depth-btn.active, .depth-btn:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+            font-weight: bold;
+        }
+
+        #depth-info {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            min-height: 80px;
+        }
+
+        /* Подвал */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🌊 ОКЕАНОЛОГИЯ</div>
+        <nav>
+            <a href="#about">О хобби</a>
+            <a href="#creatures">Обитатели</a>
+            <a href="#zones">Зоны океана</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Тайны подводного мира</h1>
+        <p>Океан покрывает более 70% поверхности нашей планеты, но изучен меньше, чем поверхность Луны. Здесь собрано всё, за что я люблю морскую биологию и дайвинг.</p>
+        <a href="#about" class="btn">Погрузиться</a>
+    </section>
+
+    <section id="about">
+        <h2>Почему меня увлекает океан</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🤿</div>
+                <h3>Исследование и дайвинг</h3>
+                <p>Наблюдение за коралловыми рифами вживую — это ощущение полёта в невесомости среди живого мегаполиса.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🐠</div>
+                <h3>Морская аквариумистика</h3>
+                <p>Создание замкнутой рифовой экосистемы дома требует знаний химии воды, освещения и биологии.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📸</div>
+                <h3>Подводная съёмка</h3>
+                <p>Охота за редкими кадрами: от крошечных голожаберных моллюсков до величественных скатов манта.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="creatures">
+        <h2>Удивительные обитатели</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🐙</div>
+                <h3>Осьминог</h3>
+                <p>Обладает тремя сердцами, голубой кровью и интеллектом, позволяющим решать сложные головоломки и открывать банки.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🦈</div>
+                <h3>Китовая акула</h3>
+                <p>Самая большая из существующих рыб (до 18 метров), которая питается исключительно планктоном и совершенно безопасна для человека.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🪼</div>
+                <h3>Бессмертная медуза</h3>
+                <p>Turritopsis dohrnii способна возвращаться из взрослой стадии обратно в стадию полипа, перезапуская свой жизненный цикл.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="zones">
+        <h2>Интерактив: Спуститесь на глубину</h2>
+        <div class="depth-box">
+            <div class="depth-controls">
+                <button class="depth-btn active" onclick="showZone('sunlight', this)">0–200 м (Солнечная)</button>
+                <button class="depth-btn" onclick="showZone('twilight', this)">200–1000 м (Сумеречная)</button>
+                <button class="depth-btn" onclick="showZone('midnight', this)">1000–4000 м (Полуночная)</button>
+            </div>
+            <div id="depth-info">
+                <strong>Эпипелагиаль (0–200 м):</strong> Сюда проникает солнечный свет, идёт фотосинтез. Здесь обитает 90% всей морской жизни: дельфины, черепахи, кораллы и стайные рыбы.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Создано в 21.11.2026 | Увлечение морским миром, 2026</p>
+    </footer>
+
+    <script>
+        const zonesData = {
+            sunlight: "<strong>Эпипелагиаль (0–200 м):</strong> Сюда проникает солнечный свет, идёт фотосинтез. Здесь обитает 90% всей морской жизни: дельфины, черепахи, кораллы и стайные рыбы.",
+            twilight: "<strong>Мезопелагиаль (200–1000 м):</strong> Света почти нет, температура резко падает. Многие обитатели, например светящиеся анчоусы и кальмары, используют биолюминесценцию для маскировки и охоты.",
+            midnight: "<strong>Батипелагиаль (1000–4000 м):</strong> Абсолютная темнота и колоссальное давление. Здесь живут глубоководные удильщики, гигантские изоподы и кашалоты, ныряющие за добычей."
+        };
+
+        function showZone(zoneKey, btnElement) {
+            document.getElementById('depth-info').innerHTML = zonesData[zoneKey];
+            document.querySelectorAll('.depth-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
